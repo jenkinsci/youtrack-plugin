@@ -139,7 +139,7 @@ public class YouTrackBuildUpdater extends Recorder {
                 for (String issueId : issueIds) {
                 Issue issue = new Issue(issueId);
 
-                    String commandValue = "Fixed in build " + buildName;
+                    String commandValue = "fixedinbuild " + buildName; // alias to "fixed in build"
                     Command command = youTrackServer.applyCommand(youTrackSite.getName(), user, issue, commandValue, null, null, null, !runSilently);
                     if(command.getStatus() == Command.Status.OK) {
                         listener.getLogger().println("Updated Fixed in build to " + buildName + " for " + issueId);
