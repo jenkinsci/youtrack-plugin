@@ -111,7 +111,7 @@ public class YouTrackBuildUpdaterTest {
         when(youTrackServer.addBuildToBundle("site", user, "Build Bundle", "${BUILD_NUMBER}")).thenReturn(command);
         Command command1 = new Command();
         command1.setStatus(Command.Status.OK);
-        when(youTrackServer.applyCommand("site", user, e, "Fixed in build ${BUILD_NUMBER}", null, null, null, true)).thenReturn(command1);
+        when(youTrackServer.applyCommand("site", user, e, "fixedinbuild ${BUILD_NUMBER}", null, null, null, true)).thenReturn(command1);
         user.setUsername("user");
         user.setLoggedIn(true);
         doReturn(user).when(youTrackServer).login("user","password");
