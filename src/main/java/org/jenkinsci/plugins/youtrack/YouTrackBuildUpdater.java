@@ -41,7 +41,7 @@ public class YouTrackBuildUpdater extends Recorder {
     @Getter @Setter private boolean markFixedIfUnstable;
     @Getter @Setter private boolean onlyAddIfHasFixedIssues;
     @Getter @Setter private boolean runSilently;
-    @Getter @Setter private String buildUpdateCommand;
+    @Setter private String buildUpdateCommand;
 
     @DataBoundConstructor
     public YouTrackBuildUpdater(String name, String bundleName, String buildName, boolean markFixedIfUnstable, boolean onlyAddIfHasFixedIssues, boolean runSilently, String buildUpdateCommand) {
@@ -53,7 +53,7 @@ public class YouTrackBuildUpdater extends Recorder {
         this.onlyAddIfHasFixedIssues = onlyAddIfHasFixedIssues;
         this.runSilently = runSilently;
         this.buildUpdateCommand = buildUpdateCommand;
-        if (buildUpdateCommand == null) {
+        if (buildUpdateCommand == null || buildUpdateCommand.equals("")) {
             this.buildUpdateCommand = "Fixed in build: ${YOUTRACK_BUILD_NAME}";
         }
     }
@@ -73,6 +73,13 @@ public class YouTrackBuildUpdater extends Recorder {
             this.buildName = "${BUILD_NUMBER} ("+name+")";
         }
         return buildName;
+    }
+    
+    public String getBuildUpdateCommand() {
+        if (buildUpdateCommand == null || buildUpdateCommand.equals("")) {
+            this.buildUpdateCommand = "Fixed in build: ${YOUTRACK_BUILD_NAME}";
+        }
+        return buildUpdateCommand;
     }
 
     public BuildStepMonitor getRequiredMonitorService() {
